@@ -19,24 +19,10 @@ namespace ElasticsearchExample
             indexSettings.NumberOfReplicas = 1;
             indexSettings.NumberOfShards = 1;
 
-            //client.CreateIndex(c => c
-            //    .Index("my_blog")
-            //    .InitializeUsing(indexSettings)
-            //    .AddMapping<Post>(m => m.MapFromAttributes()));
-
-            InsertData();
-        }
-
-        public static void InsertData()
-        {
-            var newBlogPost = new Post
-            {
-                UserId = 1,
-                PostDate = DateTime.Now,
-                PostText = "This is a blog post from NEST!"
-            };
-
-            client.Index(newBlogPost);
+            client.CreateIndex(c => c
+                .Index("my_blog")
+                .InitializeUsing(indexSettings)
+                .AddMapping<Post>(m => m.MapFromAttributes()));
         }
     }
 }
