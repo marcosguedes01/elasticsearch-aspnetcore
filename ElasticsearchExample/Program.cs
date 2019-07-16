@@ -26,7 +26,8 @@ namespace ElasticsearchExample
 
             //InsertData();
             //PerformTermQuery();
-            PerformMatchPhrase();
+            //PerformMatchPhrase();
+            PerformFilter();
         }
 
         public static void InsertData()
@@ -68,6 +69,13 @@ namespace ElasticsearchExample
         {
             var result = client.Search<Post>(s => s
                 .Query(q => q.MatchPhrase(m => m.OnField("postText").Query("this is a third blog post"))));
+        }
+
+        public static void PerformFilter()
+        {
+            var result = client.Search<Post>(s => s
+                .Query(q => q.Term(p => p.PostText, "blog"))
+                .Filter(f => f.Range(r => r.OnField("postDate").Greater("2019-07-21"))));
         }
     }
 }
