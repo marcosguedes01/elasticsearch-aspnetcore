@@ -33,10 +33,26 @@ namespace ElasticsearchExample
             {
                 UserId = 1,
                 PostDate = DateTime.Now,
-                PostText = "This is a blog post from NEST!"
+                PostText = "This is another blog post."
+            };
+
+            var newBlogPost2 = new Post
+            {
+                UserId = 2,
+                PostDate = DateTime.Now,
+                PostText = "This is a third blog post."
+            };
+
+            var newBlogPost3 = new Post
+            {
+                UserId = 2,
+                PostDate = DateTime.Now.AddDays(5),
+                PostText = "This is a blog post from the future."
             };
 
             client.Index(newBlogPost);
+            client.Index(newBlogPost2);
+            client.Index(newBlogPost3);
         }
     }
 }
